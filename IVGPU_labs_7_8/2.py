@@ -49,31 +49,27 @@ class City:
 # -----------------------------------------------------------------
 
 
-def get_json_data():
-    cities_list = []
+def get_files_data():
+    cities_set = set()
+
     with open('Города.json', "r", encoding='utf-8') as json_infile:
         cities = json.load(json_infile)
         for city in cities['data']:
-            cities_list.append(City(
+            cities_set.add(City(
                 city["Индекс"], city["Тип региона"], city["Регион"], city["Город"], city["Население"]))
     json_infile.close()
-    return cities_list
 
-# -----------------------------------------------------------------
-
-
-def get_csv_data():
-    cities_list = []
     with open("Города.csv", encoding='utf-8') as csv_infile:
         file_reader = csv.reader(csv_infile, delimiter=",")
         count = 0
         for row in file_reader:
             if count > 0:
-                cities_list.append(
+                cities_set.add(
                     City(row[0], row[1], row[2], row[3], row[4]))
             count += 1
     csv_infile.close()
-    return cities_list
+
+    return frozenset(cities_set)
 
 # -----------------------------------------------------------------
 
@@ -124,10 +120,10 @@ def set_csv_data(cities_list_sorted):
 if __name__ == "__main__":
 
     # Объединяем списки городов из json и csv в одну коллекцию
-    cities_list = get_json_data() + get_csv_data()
+    cities_frosenset = get_files_data()
 
     # Cортирует список по `population` в естественном порядке
-    cities_list_sorted = sorted(cities_list, key=sort_key)
+    cities_list_sorted = sorted(cities_frosenset, key=sort_key)
 
     # Создаёт файл json с отсортированным списком городов
     set_json_data(cities_list_sorted)
