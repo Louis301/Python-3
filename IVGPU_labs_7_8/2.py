@@ -29,14 +29,14 @@ class City:
             self.population = 0
 
         self.region = region
-        self.index = index
+        self.index = int(index)
         self.region_type = region_type
 
     def __eq__(self, other):
-        return self.index == other.index and self.region_type == other.region_type and self.region == other.region and self.name == other.name and self.population == other.population
+        return self.index == other.index
 
     def __hash__(self):
-        return hash((self.index, self.region_type, self.region, self.name, self.population))
+        return self.index
 
     def print(self):
         print("name", self.name)
