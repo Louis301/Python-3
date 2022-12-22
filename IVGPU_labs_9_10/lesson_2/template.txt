@@ -1,0 +1,8 @@
+Соревнования по {{c_t}} завершились 
+{% if (char_1.characteristic > char_2.characteristic) %}
+победой {{char_1.name}} с характеристикой {{char_1.characteristic}}
+{% elif (char_1.characteristic < char_2.characteristic) %}
+победой {{char_2.name}} с характеристикой {{char_2.characteristic}} 
+{% else %}
+ничьёй участников {{char_1.name}} и {{char_2.name}}
+{% endif %}

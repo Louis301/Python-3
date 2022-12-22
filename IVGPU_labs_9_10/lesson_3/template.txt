@@ -1,0 +1,10 @@
+{% for c in cities %}
+{%if (c.population < s_p) %}
+  <h2>{{c.name}}</h2>
+  <p>Население: {{c.population}}</p>
+  <p>Регион: {{c.region}}</p>
+  <p>Индекс: {{c.index}}</p>
+  <p>Тип региона: {{c.region_type}}</p>
+  <br>
+{% endif %}
+{% endfor %}
